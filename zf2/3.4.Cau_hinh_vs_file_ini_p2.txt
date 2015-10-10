@@ -1,0 +1,115 @@
+﻿
+////////////////////////////////////////////////////
+           TẠO VÀ ĐỌC FILE CẤU HÌNH INI
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+/** file module.config.ini  */
+/** comment in file ini => ;website     = '<h3>www.zend.vn</h3>';*/
+website             = '<h3>www.zend.vn</h3>';
+account.email       = 'zend@zend.vn';
+account.password    = 'zend@zend.vn';
+account.title       = 'zend@zend.vn';
+account.content     = 'zend@zend.vn';
+account.port        = 465;
+
+=> đọc nội dung file ini
+$reader = new \Zend\Config\Reader\Ini();
+        $data = $reader->fromFile(__DIR__.'/../../../config/ini/module.config.ini');
+        echo '<pre class="container">';
+        print_r($data);
+        echo '</pre>';
+
+
+
+/** file module.config.ini  */
+/** comment in file ini => ;website     = '<h3>www.zend.vn</h3>';*/
+website             = '<h3>www.zend.vn</h3>';
+account-email       = 'zend@zend.vn';
+account-password    = 'zend@zend.vn';
+account-title       = 'zend@zend.vn';
+account-content     = 'zend@zend.vn';
+account-port        = 465;
+account-p-a         = 'a';
+account-p-p         = 'b';
+
+=> đọc nội dung file ini
+$reader = new \Zend\Config\Reader\Ini();
+        $reader->setNestSeparator('-');/** default: '.' */
+        $data = $reader->fromFile(__DIR__.'/../../../config/ini/module.config.ini');
+        echo '<pre class="container">';
+        print_r($data);
+        echo '</pre>';
+
+////////////////////////////////////////////////////
+           VIẾT VÀ ĐỌC FILE CẤU HÌNH INI
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+
+* Tạo phân vùng cho file ini
+[production]
+account-email       = 'zend@zend.vn';
+account-password    = 'zend@zend.vn';
+account-title       = 'zend@zend.vn';
+account-content     = 'zend@zend.vn';
+account-port        = 465;
+account-p-a         = 465;
+account-p-p         = 465;
+
+[developer]
+account-email       = 'zend@zend.vn';
+account-password    = 'zend@zend.vn';
+account-title       = 'zend@zend.vn';
+account-content     = 'zend@zend.vn';
+account-port        = 465;
+account-p-a         = 465;
+account-p-p         = 465;
+
+/** index2Action() */
+	$config = new \Zend\Config\Config(array(), true);
+        $config->production                     = array();
+        $config->production->website            = 'zend@zend.com';
+        $config->production->account            = array();
+        $config->production->account->email     = 'zend@zend.vn';
+        $config->production->account->password  = 'asdsd';
+
+$writer = new \Zend\Config\Writer\Ini();
+//$writer->setNestSeparator('-');
+$writer->toFile(__DIR__.'/../../../config/ini/config.ini', $config);
+
+
+/** Chuyển thành file module.config.php thành file module.config.ini */
+; router
+router.routes.home.type                                                     = 'Zend\Mvc\Router\Http\Literal';
+router.routes.home.options.route                                            = '/';
+router.routes.home.options.defaults.controller                              = 'Training\Controller\Index';
+router.routes.home.options.defaults.action                                  = 'index';
+router.routes.training.type                                                 = 'Literal';
+router.routes.training.options.route                                        = '/training';
+router.routes.training.options.defaults.__NAMESPACE__                 = 'Training\Controller';
+router.routes.training.options.defaults.controller                    = 'Index';
+router.routes.training.options.defaults.action                        = 'index';
+router.routes.training.may_terminate                                        = true;
+router.routes.training.child_routes.default.type                            = 'Segment';
+router.routes.training.child_routes.default.options.route                   = '/[:controller[/:action]]';
+router.routes.training.child_routes.default.options.constraints.controller  = '[a-zA-Z][a-zA-Z0-9_-]*';
+router.routes.training.child_routes.default.options.constraints.action      = '[a-zA-Z][a-zA-Z0-9_-]*';
+router.routes.training.child_routes.default.options.constraints.default[]   = '';
+; controller
+controllers.invokables.Training\Controller\Index                            = 'Training\Controller\IndexController';
+controllers.invokables.Training\Controller\Config                           = 'Training\Controller\ConfigController';
+; view
+
+/** in file Module.php */
+class Module {
+    /*public function onBootstrap() {}*/
+    /** Đọc cấu hình file config/module.config.php */
+    public function getConfig() {
+        $reader = new \Zend\Config\Reader\Ini();
+        $reader->setNestSeparator('.');/** default: '.' */
+        $configArray = $reader->fromFile(__DIR__.'/config/ini/module.config.ini');
+        $configArray['view_manager']['template_path_stack'][] =  __DIR__.'/view';
+        return $configArray;
+    }
+}
+
+/** chia file cấu hình ra thành nhiều phần => view-controller.php , và router.ini */

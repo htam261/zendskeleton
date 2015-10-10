@@ -1,0 +1,44 @@
+﻿- Cấu trúc tập tin
++ app
+  |- config
+     |-module.config.php  => cấu hình hệ thống
+  |- language
+  |- src
+  |  |- App
+  |  |  |- Controller
+  |  |  |   |- IndexController.php
+  |- view
+  |   |- error
+  |   |- layout
+  |   |- App
+  |   |  |- index
+  |   |  |   |- index.phtml
+  | Module.php => Theo 1 cấu trúc và khai báo namespace => trùng tên Module => class Module
+
+/** cấu hình file module của app */
+Module.php
+
+namespace App;
+class Module {
+	/** lấy thông tin cấu hình */
+	public function getConfig() {
+		/* framework (zf1)
+		$cofigArray = array();
+		return $configArray(); */
+		/** return file config array */
+		return include _DIR_.'config/module.config.php';
+	}
+	/** tự động load các controller */
+	public function getAutoloadConfig() {
+		
+	}
+}
+ 
+
+/** file module.config.php */
+return array(
+	'router' => array(), /** copy co sẵn */
+	'controllers' => array(),
+	'view_manager' => array( /** xác định folder view */
+	),
+);

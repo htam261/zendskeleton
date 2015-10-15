@@ -8,7 +8,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Training\Controller\Index',
+                        'controller' => 'Data\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),
@@ -20,10 +20,10 @@ return array(
             'training' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/training',
+                    'route'    => '/data',
                     /** action mặc định */
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Training\Controller',
+                        '__NAMESPACE__' => 'Data\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
                     ),
@@ -48,10 +48,8 @@ return array(
     ),
     'controllers'   => array(
         'invokables' => array(
-            'Training\Controller\Index'         => 'Training\Controller\IndexController',
-            'Training\Controller\Config'        => 'Training\Controller\ConfigController',
-            'Training\Controller\Autoloader'    => 'Training\Controller\AutoloaderController',
-            'Training\Controller\Filter'    => 'Training\Controller\FilterController',
+            'Data\Controller\Index'    => 'Data\Controller\IndexController',
+            'Data\Controller\Filter'    => 'Data\Controller\FilterController',
         ),
     ),
     'view_manager'  => array(

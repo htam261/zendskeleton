@@ -1,5 +1,5 @@
 <?php
-namespace Training;
+namespace Data;
 
 class Module {
     public function init(\Zend\ModuleManager\ModuleManager $moduleManager) {

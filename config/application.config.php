@@ -5,13 +5,15 @@
  * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-system-configuration
  * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-application-configuration
  */
+$module = array('Hello');
+$module[] = 'Training';
+$module[] = 'Data';
+if (APPLICATION_ENV == 'production') {/** production , development*/
+    $module[] = 'Training';
+}
 return array(
     // This should be an array of module namespaces used in the application.
-    'modules' => array(
-        'Hello',
-        'Training',
-        'Admin'
-    ),
+    'modules' => $module,
 
     // These are various options for the listeners attached to the ModuleManager
     'module_listener_options' => array(

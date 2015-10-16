@@ -48,8 +48,11 @@ return array(
     ),
     'controllers'   => array(
         'invokables' => array(
-            'Data\Controller\Index'    => 'Data\Controller\IndexController',
+            'Data\Controller\Index'     => 'Data\Controller\IndexController',
             'Data\Controller\Filter'    => 'Data\Controller\FilterController',
+            'Data\Controller\Serializer'=> 'Data\Controller\SerializerController',
+            'Data\Controller\Escaper'   => 'Data\Controller\EscaperController',
+            'Data\Controller\Purifier'  => 'Data\Controller\PurifierController',
         ),
     ),
     'view_manager'  => array(

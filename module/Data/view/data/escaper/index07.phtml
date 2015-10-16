@@ -1,0 +1,16 @@
+<?php header('Content-Type: applicaiton/xhtml+xml; charset=UTF-8'); ?>
+<!DOCTYPE html>
+<?php 
+    $input = <<<INPUT
+            " onmouseover="alert('zf2')
+INPUT;
+?>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+    <head>
+        <title>Unescaped URL data</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <a href="http://example.com/?name=<?php echo $input; ?>">Click here!</a>
+    </body>
+</html>

@@ -51,7 +51,7 @@ return array(
             'Training\Controller\Index'         => 'Training\Controller\IndexController',
             'Training\Controller\Config'        => 'Training\Controller\ConfigController',
             'Training\Controller\Autoloader'    => 'Training\Controller\AutoloaderController',
-            'Training\Controller\Filter'    => 'Training\Controller\FilterController',
+            'Training\Controller\Filter'        => 'Training\Controller\FilterController',
         ),
     ),
     'view_manager'  => array(

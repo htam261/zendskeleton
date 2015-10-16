@@ -5,8 +5,6 @@
  */
 include 'define.php';
 
-echo APPLICATION_PATH;
-
 // Decline static file requests back to the PHP built-in webserver
 if (php_sapi_name() === 'cli-server') {
     $path = realpath(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
@@ -19,13 +17,21 @@ if (php_sapi_name() === 'cli-server') {
 // Setup autoloading
 require 'init_autoloader.php';
 /** Options autoloader*/
-// require 'define.php';
-// include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
-// Zend\Loader\AutoloaderFactory::factory(array(
-//     'Zend\Loader\StandardAutoloader' => array(
-//         'autoregister_zf' => true
-//     )
-// ));
+ require 'define.php';
+ //include LIBRARY_PATH . '/../../../Zend/Loader/AutoloaderFactory.php';
+ @include LIBRARY_PATH;
+ Zend\Loader\AutoloaderFactory::factory(array(
+     'Zend\Loader\StandardAutoloader' => array(
+         'autoregister_zf' => true,
+         'namespaces' => array(
+             'ZendVN' => LIBRARY_PATH.'/../../../ZendVN',
+             
+         ),
+         'prefixes' => array(
+             'HTMLPurifier' => LIBRARY_PATH.'/../../../HTMLPurifier'
+         )
+     )
+ ));
 
 
 // Run the application!

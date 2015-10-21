@@ -144,4 +144,17 @@ class PurifierController extends AbstractActionController {
         echo 'Output: '.$output;
         return false;
     }
+    
+    public function Index12Action() {
+        $input = '<a href="&#106;&#107;&#108;&#108;&#97;&#115;">adasdas';
+        $config = array(
+            array('Attr.EnableID', true),
+            array('Output.SortAttr', true),
+        );
+//        $filter = new \ZendVN\Filter\Purifier($config);
+//        $output = $filter->filter($input);
+        $output = \Zend\Filter\StaticFilter::execute($input, 'Purifier', $config);
+        echo 'Output: '.$output;
+        return false;
+    }
 }

@@ -1,7 +1,22 @@
 <?php
 namespace Data;
 
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Filter\StaticFilter;
+
 class Module {
+    public function onBootstrap(MvcEvent $e) {
+        $eventManager = $e->getApplication()->getEventManager();
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+        
+        $filterPlugin = \Zend\Filter\StaticFilter::getPluginManager();
+        $filterPlugin->setInvokableClass('CreateURLFriendly', '\ZendVN\Filter\CreateURLFriendly');
+        $filterPlugin->setInvokableClass('RemoveCircumflex', '\ZendVN\Filter\RemoveCircumflex');
+        $filterPlugin->setInvokableClass('Purifier', '\ZendVN\Filter\Purifier');
+    }
+    
     public function init(\Zend\ModuleManager\ModuleManager $moduleManager) {
         $event = $moduleManager->getEventManager();
         $event->attach(\Zend\ModuleManager\ModuleEvent::EVENT_MERGE_CONFIG, array($this, 'onMergeConfig'));

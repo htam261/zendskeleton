@@ -53,6 +53,7 @@ return array(
             'Data\Controller\Serializer'=> 'Data\Controller\SerializerController',
             'Data\Controller\Escaper'   => 'Data\Controller\EscaperController',
             'Data\Controller\Purifier'  => 'Data\Controller\PurifierController',
+            'Data\Controller\Dom'       => 'Data\Controller\DomController',
         ),
     ),
     'view_manager'  => array(

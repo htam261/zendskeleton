@@ -8,7 +8,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Data\Controller\Index',
+                        'controller' => 'Mvc\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),
@@ -20,10 +20,10 @@ return array(
             'training' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/data',
+                    'route'    => '/mvc',
                     /** action mặc định */
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Data\Controller',
+                        '__NAMESPACE__' => 'Mvc\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
                     ),
@@ -48,13 +48,8 @@ return array(
     ),
     'controllers'   => array(
         'invokables' => array(
-            'Data\Controller\Index'     => 'Data\Controller\IndexController',
-            'Data\Controller\Filter'    => 'Data\Controller\FilterController',
-            'Data\Controller\Serializer'=> 'Data\Controller\SerializerController',
-            'Data\Controller\Escaper'   => 'Data\Controller\EscaperController',
-            'Data\Controller\Purifier'  => 'Data\Controller\PurifierController',
-            'Data\Controller\Dom'       => 'Data\Controller\DomController',
-            'Data\Controller\Json'      => 'Data\Controller\JsonController',
+            'Mvc\Controller\Index'     => 'Mvc\Controller\IndexController',
+            'Mvc\Controller\Event'     => 'Mvc\Controller\EventController',
         ),
     ),
     'view_manager'  => array(

@@ -1,5 +1,5 @@
 <?php
-namespace Data;
+namespace Mvc;
 
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\ModuleRouteListener;
@@ -25,10 +25,6 @@ class Module {
     public function onMergeConfig(\Zend\ModuleManager\ModuleEvent $event) {
         $configListener = $event->getConfigListener();
         $config = $configListener->getMergedConfig(false);
-//        echo '<pe>';
-//        print_r($config);
-//        echo '</pre>';
-        
     }
     /*public function onBootstrap() {}*/
     /** Đọc cấu hình file config/module.config.php */

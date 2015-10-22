@@ -71,4 +71,74 @@ class EventController extends AbstractActionController {
         $eventManager->trigger('eventThree_');
         return $this->response;
     }
+    /** Priority => Độ ưu tiên **/
+    public function index03Action() {
+        $eventManager = new EventManager();
+        $eventManager->attach('eventOne', function() {
+            echo '<h3 style="color:red;font-weight:bold;">eventOne - 01</h3>';
+        }, -1000);
+        $eventManager->attach('eventOne', function() {
+            echo '<h3 style="color:red;font-weight:bold;">eventTwo - 02</h3>';
+        },0);
+        $eventManager->attach('eventOne',array('ZendVN\Event\Functions','funcOne'));
+        $eventManager->attach('eventOne',array('ZendVN\Event\Functions','funcTwo'),1000);
+        $eventManager->trigger('eventOne');
+        
+        return $this->response;
+    }
+    /** Params in EventManager => các sử dụng các tham số và phương thức */
+    /** \Zend\EventManager\EventInterface */
+    public function index04Action() {
+        $eventManager = new EventManager();
+        $eventManager->attach('eventOne',function(\Zend\EventManager\EventInterface $e) {
+            
+        });
+        $listener01 = function(\Zend\EventManager\EventInterface $e) {
+            echo '<pre>';
+            print_r($e);
+            echo '</pre>';
+            $name = $e->getName();
+            $params = $e->getParams();
+            $target = $e->getTarget();
+            $e->setParam('course', 'default');
+            echo $param_name = $e->getParam('course','default');
+            
+        };
+        $eventManager->attach('eventOne',$listener01);
+        
+        $params = array(
+            'course' => 'Zend Framework 2',
+            'year'   => '2015'
+        );
+        $eventManager->trigger('eventOne',this, $params);
+        
+        return $this->response;
+    }
+    /** \Zend\EventManager\EventInterface */
+    public function index05Action() {
+        $eventManager = new EventManager();
+        $eventManager->attach('eventOne',function(\Zend\EventManager\EventInterface $e) {
+            
+        });
+        $listener01 = function(\Zend\EventManager\EventInterface $e) {
+            echo '<pre>';
+            print_r($e);
+            echo '</pre>';
+            $name = $e->getName();
+            $params = $e->getParams();
+            $target = $e->getTarget();
+            $e->setParam('course', 'default');
+            echo $param_name = $e->getParam('course','default');
+            
+        };
+        $eventManager->attach('eventOne',$listener01);
+        
+        $params = array(
+            'course' => 'Zend Framework 2',
+            'year'   => '2015'
+        );
+        $eventManager->trigger('eventOne',this, $params);
+        
+        return $this->response;
+    }
 }

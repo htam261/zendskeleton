@@ -50,6 +50,7 @@ return array(
         'invokables' => array(
             'Mvc\Controller\Index'     => 'Mvc\Controller\IndexController',
             'Mvc\Controller\Event'     => 'Mvc\Controller\EventController',
+            'Mvc\Controller\Service'   => 'Mvc\Controller\ServiceController',
         ),
     ),
     'view_manager'  => array(

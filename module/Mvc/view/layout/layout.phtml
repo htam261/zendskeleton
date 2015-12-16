@@ -1,0 +1,19 @@
+<?php echo $this->docType(); ?>
+<html>
+	<head>
+		<?php echo $this->headTitle('Zend 2 Training'); ?>
+		<?php echo $this->headMeta(); ?>
+		<?php echo $this->headLink()
+						->appendStylesheet(PUBLIC_URL.'/css/bootstrap.css')
+						->appendStylesheet(PUBLIC_URL.'/css/style.css'); ?>
+		<?php echo $this->headScript()
+						->appendFile(PUBLIC_URL.'/js/jquery.min.js')
+						->appendFile(PUBLIC_URL.'/js/bootstrap.min.js');
+		?>
+	</head>
+	<body>
+		<?php echo '<h3 style="color:red;font-weight:bold;">'.__FILE__.'</h3>';?>
+		<?php echo $this->content; ?>
+		<?php echo $this->header; ?>
+	</body>
+</html>

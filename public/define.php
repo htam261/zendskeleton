@@ -7,3 +7,5 @@ chdir(dirname(__DIR__));
 @define('HTMLPURIFIER_PREFIX', APPLICATION_PATH.'/vendor'); /** */
 
 @define('APPLICATION_ENV', (getenv('APPLICATION_ENV')?getenv('APPLICATION_ENV'):'production'));/** production */
+@define('APPLICATION_URL', 'http://zendskeleton.com');
+@define('PUBLIC_URL', APPLICATION_URL.'/public');

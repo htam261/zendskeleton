@@ -1,0 +1,15 @@
+<?php 
+$name = $this->escapeHtml($this->name);
+$description = $this->escapeHtml($this->description);
+$style = $this->style;
+
+$strStyle = '';
+foreach($style as $k => $v) {
+	$strStyle .= $k.':'.$v.';';
+}
+$xhtml = '<div>
+	<h3 style="'.$strStyle.'">'.$name.'</h3>
+	<p>'.$description.'</p>
+</div>';
+echo $xhtml;
+?>

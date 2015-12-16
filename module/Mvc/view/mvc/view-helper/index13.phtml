@@ -1,0 +1,10 @@
+<?php
+$param = array('abc'=>'abcadas','def' =>'sdasdasd');
+// array => json
+echo \Zend\Json\Json::encode($param).'<br/>';
+echo $str = $this->json($param);
+// json => array
+echo '<pre style="color:red; font-weight:bold;">';
+print_r(\Zend\Json\Json::decode($str));
+echo '</pre>';
+?>

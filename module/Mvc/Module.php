@@ -4,8 +4,9 @@ namespace Mvc;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Filter\StaticFilter;
+use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 
-class Module {
+class Module implements ViewHelperProviderInterface{
     public function onBootstrap(MvcEvent $e) {
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
@@ -15,8 +16,42 @@ class Module {
         $filterPlugin->setInvokableClass('CreateURLFriendly', '\ZendVN\Filter\CreateURLFriendly');
         $filterPlugin->setInvokableClass('RemoveCircumflex', '\ZendVN\Filter\RemoveCircumflex');
         $filterPlugin->setInvokableClass('Purifier', '\ZendVN\Filter\Purifier');
+        
+        
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $eventManager 	= $e->getApplication()->getEventManager();
+        /** Thay đổi thông báo lỗi =)) hehe */
+        //* $eventManager->attach('dispatch',array($this, 'loadConfig'));*/
+        /* $eventManager->attach('render',array($this, 'setTitle')); */
     }
-    
+    public function loadConfig($e) {
+//     	$matches = $e->getRouteMatch();
+//     	$controller = $matches->getParam('controller');
+//     	/** Kiểm tra module hiện tại nếu là Mvc thì gọi cấu hình khác */
+//     	if (strpos($controller,__NAMESPACE__,0) !== 0) {return;}
+//     	/** Lấy service manager */
+//     	$sm = $e->getApplication()->getServiceManager();
+//     	/** Lấy dịch vụ đăng ký */
+//     	$exceptionStrategy = $sm->get('ViewManager')->getExceptionStrategy();
+//     	$exceptionStrategy->setExceptionTemplate('error/myerror');
+    }
+    public function setTitle($e) {
+    	$moduleName = __NAMESPACE__;
+    	$matches = $e->getRouteMatch();
+    	$controller = $matches->getParam('__CONTROLLER__');
+    	$action = $matches->getParam('action');
+    	
+    	$serviceManager = $e->getApplication()->getServiceManager();
+    	$viewHelper 	= $serviceManager->get('viewHelperManager');
+    	
+    	$headTitle 		= $viewHelper->get('headTitle');
+    	
+    	$headTitle->append($moduleName);
+    	$headTitle->append($controller);
+    	$headTitle->append($action);
+    	
+    	$headTitle->setSeparator(' - ');
+    }
     public function init(\Zend\ModuleManager\ModuleManager $moduleManager) {
         $event = $moduleManager->getEventManager();
         $event->attach(\Zend\ModuleManager\ModuleEvent::EVENT_MERGE_CONFIG, array($this, 'onMergeConfig'));
@@ -42,8 +77,17 @@ class Module {
 //        $configArray = $reader->fromFile(__DIR__.'/config/ini/router.ini');
 //        $controller_view = include __DIR__.'/config/ini/controller-view.php';
 //        $configArray = array_merge($configArray, $controller_view);
-        return include __DIR__.'/config/module.config.php';
+        
+    	
+    	//return include __DIR__.'/config/module.config.php';
+    	
+    	/** gộp 2 file cấu hình lại => router và module */
+    	return array_merge(
+    		include_once __DIR__.'/config/module.config.php'
+    		, include_once __DIR__.'/config/router.config.php'
+    	);
     }
+   
     /** Tự động load các class và controller , module tương ứng thông qua Module Manager */
     public function getAutoloaderConfig()
     {
@@ -55,4 +99,18 @@ class Module {
             ),
         );
     }
+    public function getViewHelperConfig() {
+    	return array(
+    			'invokables' => array(
+    					'say_hello' => '\ZendVN\View\Helper\SayHello',
+    			),
+    			//     			'factories' => array(
+    					//     					$say_hello => function($sm) {
+    					//     						$say_hello = new ZendVN\View\Helper\SayHello();
+    					//     						return $say_hello;
+    					//     					}
+    					//     			),
+    	);
+    }
+    
 }

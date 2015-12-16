@@ -1,0 +1,26 @@
+<?php 
+/** Luu tru gia tri trong placeholder */
+// $this->placeholder('fooOne')->set('One Value');
+// echo $this->placeholder('fooOne');
+/** su dung prefix and postfix placeholder */
+// $this->placeholder('fooTwo')->set('Two')->setPrefix('--')->setPostfix('++')->setSeparator('xx');
+// echo $this->placeholder('fooTwo');
+
+// /** su dung separator */
+// $courses = array(
+// 		'Zend 2', 'jQuery', 'Joomla'
+// );
+// $this->placeholder('fooThree')->exchangeArray($courses);
+// $this->placeholder('fooThree')->setPrefix('<ul><li>')
+// 								->setPostfix('</li></ul>')
+// 								->setSeparator('</li><li>');
+// echo $this->placeholder('fooThree');
+
+/** luu tru the html */
+?>
+<?php $this->placeholder('html')->captureStart(); ?>
+<div>
+	<h3>abc</h3>
+</div>
+<?php $this->placeholder('html')->captureEnd(); ?>
+<?php echo $this->placeholder('html'); ?>

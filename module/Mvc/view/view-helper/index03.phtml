@@ -1,0 +1,23 @@
+<?php
+$arrayNumber = array(1, 2, 3, 4, 5);
+// echo '<br/>'.$this->cycle($arrayNumber);
+// echo '<br/>'.$this->cycle($arrayNumber)->next();
+// echo '<br/>'.$this->cycle($arrayNumber)->next();
+// echo '<br/>'.$this->cycle($arrayNumber)->next();
+// echo '<br/>'.$this->cycle($arrayNumber);
+// echo '<br/>'.$this->cycle($arrayNumber)->prev();
+
+// for ($i = 0; $i < 5; $i++) {
+// 	echo '<br/>'.$this->cycle($arrayNumber);
+// }
+
+// echo '<pre style="color:red; font-weight:bold;">';
+// print_r($this->courses);
+// echo '</pre>';
+
+if (!empty($this->courses)) {
+	foreach($this->courses as $value) {
+		echo '<li style="background-color:'.$this->cycle(array('red', 'yellow'))->next().'">'.$value['name'].'</li>';
+	}
+}
+?>

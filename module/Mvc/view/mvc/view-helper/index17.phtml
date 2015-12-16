@@ -1,0 +1,28 @@
+<?php
+$courses = array(
+		array(
+				'name' => 'Joomla 2.5',
+				'description' => 'Mo ta Joomla 2.5',
+				'style' => array(
+						'color' => 'blue',
+						'text-transform' => 'uppercase'
+				),
+			),
+				array(
+						'name' => 'Joomla 2.5',
+						'description' => 'Mo ta Joomla 2.5',
+						'style' => array(
+								'color' => 'blue',
+								'text-transform' => 'uppercase'
+						)
+			),
+		array(
+				'name' => 'jQuery',
+				'description' => 'Mo ta jQuery',
+				'style' => array(
+						'color' => 'blue'
+				)
+				
+		)
+);
+echo $this->partialLoop('mvc\course.phtml',$courses);

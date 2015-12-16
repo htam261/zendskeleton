@@ -1,0 +1,20 @@
+<?php
+$items = array(
+		'Zend Framework',
+		array(
+			'Zend Framework 1.x',
+			'Zend Framework 2.x',
+			array('Filter', 'Mvc'),
+			'Zend Framework Document'
+		),
+		'Joomla 2.5',
+);
+/** normal => ul */
+//echo $this->htmlList($items);
+/** ol */
+//echo $this->htmlList($items, true);
+/** attributes => ul, ol */
+//echo $this->htmlList($items, true, array('class'=>'abc', 'id'=>'d', 'style'=>'color:red'));
+/** escape => recommend => bảo vệ document */
+echo $this->htmlList($items, true, array('class'=>'abc', 'id'=>'d', 'style'=>'color:red'), true);
+?>

@@ -5,7 +5,7 @@
  * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-system-configuration
  * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-application-configuration
  */
-$module = array('Hello', 'Training', 'Data', 'Mvc');
+$module = array('Hello', 'Training', 'Data', 'Mvc', 'Route');
 //if (APPLICATION_ENV == 'production') {/** production , development*/
 //    $module[] = 'Training';
 //}
